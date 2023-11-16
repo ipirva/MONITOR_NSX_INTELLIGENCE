@@ -8,4 +8,10 @@ pushgateway_endpoint="http://pushgateway-service:8080/metrics/job/nsxi-platform/
 minio_total_data_storage=0
 minio_total_data_storage=$(kubectl exec -it minio-0 -n nsxi-platform -- du -k --max-depth=1 /data/minio/ | awk '{ sum += $1 } END { print sum }')
 # 770380 in Kilo Bytes
-echo "minio_total_data_storage $minio_total_data_storage" | curl -v --data-binary @- $pushgateway_endpoint
+
+if [ ! -z "$minio_total_data_storage" ]
+then
+    echo "minio_total_data_storage $minio_total_data_storage" | curl -v --data-binary @- $pushgateway_endpoint
+else
+    echo "[ERROR] minio_total_data_storage value not set or empty."
+fi

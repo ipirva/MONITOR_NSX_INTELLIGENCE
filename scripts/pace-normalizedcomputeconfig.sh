@@ -8,4 +8,10 @@ pushgateway_endpoint="http://pushgateway-service:8080/metrics/job/nsxi-platform/
 pace_normalizedcomputeconfig=0
 pace_normalizedcomputeconfig=$(kubectl exec -it postgresql-ha-postgresql-0 -n nsxi-platform -- bash -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -qtAX -d pace -c "SELECT COUNT(*) from normalizedcomputeconfig;"')
 # 14
-echo "pace_normalizedcomputeconfig $pace_normalizedcomputeconfig" | curl -v --data-binary @- $pushgateway_endpoint
+
+if [ ! -z "$pace_normalizedcomputeconfig" ]
+then
+    echo "pace_normalizedcomputeconfig $pace_normalizedcomputeconfig" | curl -v --data-binary @- $pushgateway_endpoint
+else
+    echo "[ERROR] pace_normalizedcomputeconfig value not set or empty."
+fi
