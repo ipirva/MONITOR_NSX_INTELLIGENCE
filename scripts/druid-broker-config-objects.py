@@ -31,7 +31,7 @@ else:
         for index, value in enumerate(content): config_type.add(value['config_type'])
         print(f"[INFO] We got {len(content)} object(s) type: {config_type}")
         # config_objects
-        for index, value in enumerate(content): pushgateway_endpoint_data.add(f"config_object_{value['config_type']} {value['EXPR$1']}\n")
+        for index, value in enumerate(content): pushgateway_endpoint_data.add(f"druid_config_object_{value['config_type']} {value['EXPR$1']}\n")
 finally:
     print(f"[INFO] Status Code: {response.status_code}")
     print(f"[INFO] Response content raw: {response.content}")
@@ -39,7 +39,7 @@ finally:
 # send different config_objects number to pushgateway
 def send_config_objects(pushgateway_endpoint_data: set) -> str:
     """
-    Pushgateway will receive one pair config_object_OBJECTNAME xxx per config object type
+    Pushgateway will receive one pair druid_config_object_OBJECTNAME xxx per config object type
     e.g. config_object_MANAGER_DFW_RULE 55
     config_object_NS_GROUP 39
     config_object_VM 666

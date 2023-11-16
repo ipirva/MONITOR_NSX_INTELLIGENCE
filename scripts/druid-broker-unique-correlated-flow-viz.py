@@ -16,7 +16,7 @@ druid_broker_sql_endpoint_data = {"query": "select APPROX_COUNT_DISTINCT_DS_HLL(
 
 pushgateway_endpoint = "http://pushgateway-service:8080/metrics/job/nsxi-platform/instance/druid-broker"
 pushgateway_endpoint_headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
-pushgateway_endpoint_data = "correlated_flow_viz_unique 0\n"
+pushgateway_endpoint_data = "druid_correlated_flow_viz_unique 0\n"
 
 # get unique correlated_flow_viz number of segments from Druid
 try:
@@ -30,7 +30,7 @@ else:
         content = json.loads(response.content.decode('ascii'))
         # unique number of correlated_flow_viz segments
         correlated_flow_viz_unique = content[0]['EXPR$0']
-        pushgateway_endpoint_data = f"correlated_flow_viz_unique {correlated_flow_viz_unique}\n"
+        pushgateway_endpoint_data = f"druid_correlated_flow_viz_unique {correlated_flow_viz_unique}\n"
 finally:
     print(pushgateway_endpoint_data)
 
