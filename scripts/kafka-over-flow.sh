@@ -14,7 +14,7 @@ kafka_over_flow=0
 
 if [ ! -z "$pod_monitor" ]
 then
-    kafka_over_flow=$(kubectl logs $pod -c $pod_monitor_container -n $namespace | egrep -owi "Kafka Input rate of topic over_flow is [0-9]{1,}" | tail -n 1 | awk '{print $NF}')
+    kafka_over_flow=$(kubectl logs $pod_monitor -c $pod_monitor_container -n $namespace | egrep -owi "Kafka Input rate of topic over_flow is [0-9]{1,}" | tail -n 1 | awk '{print $NF}')
     
     if [ ! -z "$kafka_over_flow" ]
     then
