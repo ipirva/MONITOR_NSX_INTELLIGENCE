@@ -1,0 +1,1 @@
+kubectl patch networkpolicy.networking.k8s.io druid-broker -n nsxi-platform --type='json' -p='[ { "op": "add", "path": "/spec/ingress/0/from/1", "value": { "namespaceSelector": { "matchLabels": { "kubernetes.io/metadata.name": "nsxi-platform-monitoring" } } } } ]'
