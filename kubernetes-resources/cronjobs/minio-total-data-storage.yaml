@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: minio-total-data-storage
+  namespace: nsxi-platform-monitoring
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /bin/sh
+            - /opt/scripts/minio-total-data-storage.sh
+            image: ipirva/alpine-kubectl@sha256:c6486d45be44cd2ae96ca9ca6283b11c21d35a024aea8c2b1596fc5d97ed716b
+            imagePullPolicy: IfNotPresent
+            name: worker
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /opt/scripts/
+              name: minio-total-data-storage
+              readOnly: true
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          serviceAccount: nsxi-platform-monitoring-sa
+          serviceAccountName: nsxi-platform-monitoring-sa
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - configMap:
+              defaultMode: 420
+              name: minio-total-data-storage
+            name: minio-total-data-storage
+  schedule: "*/1 * * * *"
+  successfulJobsHistoryLimit: 1
+  suspend: false
