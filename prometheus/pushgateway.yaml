@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pushgateway-data
+  namespace: nsxi-platform-monitoring
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: local-path
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,12 +28,29 @@ spec:
       labels:
         app: pushgateway
     spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: pushgateway-data
       containers:
         - name: pushgateway
           image: prom/pushgateway:v1.6.2
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--persistence.file=/data"
           ports:
             - containerPort: 9091
               name: pushgateway
+          volumeMounts:
+            - mountPath: "/data"
+              name: data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              cpu: 100m
+              memory: 500Mi
 ---
 apiVersion: v1
 kind: Service

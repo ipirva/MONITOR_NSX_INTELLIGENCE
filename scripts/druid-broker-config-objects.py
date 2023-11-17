@@ -31,7 +31,7 @@ else:
         for index, value in enumerate(content): config_type.add(value['config_type'])
         print(f"[INFO] We got {len(content)} object(s) type: {config_type}")
         # config_objects
-        for index, value in enumerate(content): pushgateway_endpoint_data.add(f"druid_config_object_{value['config_type']} {value['EXPR$1']}\n")
+        for index, value in enumerate(content): pushgateway_endpoint_data.add(f"# TYPE druid_config_object_{value['config_type']} gauge\ndruid_config_object_{value['config_type']} {value['EXPR$1']}\n")
 finally:
     print(f"[INFO] Status Code: {response.status_code}")
     print(f"[INFO] Response content raw: {response.content}")
