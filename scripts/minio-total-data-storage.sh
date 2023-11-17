@@ -11,7 +11,7 @@ minio_total_data_storage=$(kubectl exec -it minio-0 -n nsxi-platform -- du -k --
 
 if [ ! -z "$minio_total_data_storage" ]
 then
-    echo "minio_total_data_storage $minio_total_data_storage" | curl -v --data-binary @- $pushgateway_endpoint
+    echo "# TYPE minio_total_data_storage gauge\nminio_total_data_storage $minio_total_data_storage" | curl -v --data-binary @- $pushgateway_endpoint
 else
     echo "[ERROR] minio_total_data_storage value not set or empty."
 fi

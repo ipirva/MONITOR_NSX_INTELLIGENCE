@@ -18,7 +18,7 @@ then
     
     if [ ! -z "$kafka_over_flow" ]
     then
-        echo "kafka_over_flow $kafka_over_flow" | curl -v --data-binary @- $pushgateway_endpoint
+        echo "# TYPE kafka_over_flow gauge\nkafka_over_flow $kafka_over_flow" | curl -v --data-binary @- $pushgateway_endpoint
     else
         echo "[ERROR] kafka_over_flow value not set or empty."
     fi

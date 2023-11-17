@@ -13,7 +13,7 @@ pace_groupcomputerelationshipconfig=$(kubectl exec -it postgresql-ha-postgresql-
 
 if [ ! -z "$pace_groupcomputerelationshipconfig" ]
 then
-    echo "pace_groupcomputerelationshipconfig $pace_groupcomputerelationshipconfig" | curl -v --data-binary @- $pushgateway_endpoint
+    echo "# TYPE pace_groupcomputerelationshipconfig gauge\npace_groupcomputerelationshipconfig $pace_groupcomputerelationshipconfig" | curl -v --data-binary @- $pushgateway_endpoint
 else
     echo "[ERROR] pace_groupcomputerelationshipconfig value not set or empty."
 fi

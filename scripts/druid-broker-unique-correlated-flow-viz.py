@@ -30,7 +30,7 @@ else:
         content = json.loads(response.content.decode('ascii'))
         # unique number of correlated_flow_viz segments
         correlated_flow_viz_unique = content[0]['EXPR$0']
-        pushgateway_endpoint_data = f"druid_correlated_flow_viz_unique {correlated_flow_viz_unique}\n"
+        pushgateway_endpoint_data = f"# TYPE druid_correlated_flow_viz_unique gauge\ndruid_correlated_flow_viz_unique {correlated_flow_viz_unique}\n"
 finally:
     print(pushgateway_endpoint_data)
 

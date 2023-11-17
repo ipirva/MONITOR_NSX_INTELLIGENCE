@@ -11,7 +11,7 @@ pace_normalizedcomputeconfig=$(kubectl exec -it postgresql-ha-postgresql-0 -n ns
 
 if [ ! -z "$pace_normalizedcomputeconfig" ]
 then
-    echo "pace_normalizedcomputeconfig $pace_normalizedcomputeconfig" | curl -v --data-binary @- $pushgateway_endpoint
+    echo "# TYPE pace_normalizedcomputeconfig gauge\npace_normalizedcomputeconfig $pace_normalizedcomputeconfig" | curl -v --data-binary @- $pushgateway_endpoint
 else
     echo "[ERROR] pace_normalizedcomputeconfig value not set or empty."
 fi
