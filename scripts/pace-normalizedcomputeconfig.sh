@@ -3,6 +3,9 @@
 # Number of compute objects
 # This should generally be less than 10000
 
+job_start=$(date +%s)
+echo -n "The job started at: " && date -u
+
 pushgateway_endpoint="http://pushgateway-service:8080/metrics/job/nsxi-platform/instance/pace"
 
 pace_normalizedcomputeconfig=0
@@ -15,3 +18,5 @@ then
 else
     echo "[ERROR] pace_normalizedcomputeconfig value not set or empty."
 fi
+
+job_end=$(date +%s) && echo -n "The job ran for: " && echo $((job_end-job_start)) seconds

@@ -24,7 +24,7 @@ def get_time(format: str = "timestamp") -> str:
 def send_stdout(message: str = "N/A", type: str = "INFO") -> str:
     # sends message to the std output
     # types INFO, ERROR, SUCCESS
-    return f"[{type.upper()}] [{get_time(format = 'utc')}] {message}"
+    print(f"[{type.upper()}] [{get_time(format = 'utc')}] {message}")
 
 job_start = get_time(); send_stdout(message=f"The job started at: {get_time(format = 'utc')}", type="INFO")
 
@@ -34,7 +34,7 @@ druid_broker_sql_endpoint_data = {"query": "select count(*) from correlated_flow
 
 pushgateway_endpoint = "http://pushgateway-service:8080/metrics/job/nsxi-platform/instance/druid-broker"
 pushgateway_endpoint_headers = {'X-Requested-With': 'Python requests', 'Content-type': 'text/xml'}
-pushgateway_endpoint_data = "druid_correlated_flow_viz 0\n"
+pushgateway_endpoint_data = "# TYPE druid_correlated_flow_viz gauge\ndruid_correlated_flow_viz 0\n"
 
 # get correlated_flow_viz number of segments from Druid
 try:

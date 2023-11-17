@@ -3,6 +3,9 @@
 # Kakfa message rate for over_flow
 # This number should generally be less than 999
 
+job_start=$(date +%s)
+echo -n "The job started at: " && date -u
+
 pushgateway_endpoint="http://pushgateway-service:8080/metrics/job/nsxi-platform/instance/kafka"
 
 namespace="nsxi-platform"
@@ -26,3 +29,5 @@ then
 else
     echo "[ERROR] pod_monitor value not set or empty."
 fi
+
+job_end=$(date +%s) && echo -n "The job ran for: " && echo $((job_end-job_start)) seconds
