@@ -13,10 +13,11 @@ pushgateway_endpoint="http://pushgateway-service:8080/metrics/job/nsxi-platform/
 pace_groupcomputerelationshipconfig=0
 pace_groupcomputerelationshipconfig=$(kubectl exec -it postgresql-ha-postgresql-0 -n nsxi-platform -- bash -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -qtAX -d pace -c "SELECT COUNT(*) from groupcomputerelationshipconfig;"')
 # 33
+echo "[INFO] pace_groupcomputerelationshipconfig $pace_groupcomputerelationshipconfig"
 
 if [ ! -z "$pace_groupcomputerelationshipconfig" ]
 then
-    echo "# TYPE pace_groupcomputerelationshipconfig gauge\npace_groupcomputerelationshipconfig $pace_groupcomputerelationshipconfig" | curl -v --data-binary @- $pushgateway_endpoint
+    printf "# TYPE pace_groupcomputerelationshipconfig gauge\npace_groupcomputerelationshipconfig $pace_groupcomputerelationshipconfig\n" | curl -v --data-binary @- $pushgateway_endpoint
 else
     echo "[ERROR] pace_groupcomputerelationshipconfig value not set or empty."
 fi

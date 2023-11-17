@@ -13,15 +13,19 @@ pod_monitor=""
 pod_monitor=$(kubectl get pods -n $namespace --no-headers=true -o custom-columns=":metadata.name" --field-selector status.phase=Running | egrep "^monitor-[0-9]{1,}.*")
 # monitor-8476cd5bb-fpdb2
 pod_monitor_container="monitor"
+echo "[INFO] pod_monitor $pod_monitor"
+
 kafka_over_flow=0
 
 if [ ! -z "$pod_monitor" ]
 then
     kafka_over_flow=$(kubectl logs $pod_monitor -c $pod_monitor_container -n $namespace | egrep -owi "Kafka Input rate of topic over_flow is [0-9]{1,}" | tail -n 1 | awk '{print $NF}')
     
+    echo "[INFO] kafka_over_flow $kafka_over_flow"
+
     if [ ! -z "$kafka_over_flow" ]
     then
-        echo "# TYPE kafka_over_flow gauge\nkafka_over_flow $kafka_over_flow" | curl -v --data-binary @- $pushgateway_endpoint
+        printf "# TYPE kafka_over_flow gauge\nkafka_over_flow $kafka_over_flow\n" | curl -v --data-binary @- $pushgateway_endpoint
     else
         echo "[ERROR] kafka_over_flow value not set or empty."
     fi
