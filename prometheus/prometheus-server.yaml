@@ -28,6 +28,10 @@ spec:
       labels:
         app: prometheus-server
     spec:
+      securityContext:
+        fsGroup: 65534
+        runAsGroup: 65534
+        runAsUser: 65534
       containers:
         - name: prometheus
           image: prom/prometheus:v2.47.2
@@ -68,11 +72,11 @@ metadata:
   namespace: nsxi-platform-monitoring
   annotations:
       prometheus.io/scrape: 'true'
-      prometheus.io/port:   '9090'
+      prometheus.io/port: '9090'
 spec:
   selector: 
     app: prometheus-server
-  type: NodePort  
+  type: NodePort
   ports:
     - port: 8080
       targetPort: 9090 
