@@ -34,7 +34,7 @@ spec:
         runAsUser: 65534
       containers:
         - name: prometheus
-          image: prom/prometheus:v2.47.2
+          image: prom/prometheus:v2.47.2@sha256:01226a3d35f024d806c206e8d10e0bdfb6225c2366e4f8313362b4ae828f72f9
           imagePullPolicy: IfNotPresent
           args:
             - "--storage.tsdb.retention.time=30d"

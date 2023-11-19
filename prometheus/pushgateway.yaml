@@ -34,7 +34,7 @@ spec:
             claimName: pushgateway-data
       containers:
         - name: pushgateway
-          image: prom/pushgateway:v1.6.2
+          image: prom/pushgateway:v1.6.2@sha256:71baaf14c915baf382564613e7d9f7edcbc872777f4ca346db8ec2b95644ed1d
           imagePullPolicy: IfNotPresent
           args:
             - "--persistence.file=/data"

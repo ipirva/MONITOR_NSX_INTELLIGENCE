@@ -1,12 +1,17 @@
 # MONITOR_NSX_INTELLIGENCE
 
-Get some NSXI parameters monitored. The metrics are exported to Prometheus via Pushgateway.
+Get some NSXI parameters monitored. 
+The metrics are exported to Prometheus via Pushgateway.
+The metrics can be viewed inside Grafana. An exported Dashboard is shared.
 
-Prometheus ClusterIP service: prometheus-service:8080
+Prometheus ClusterIP service: prometheus-service.nsxi-platform-monitoring:8080
 Prometheus NodePort 30000
 
-Pushgateway ClusterIP service: pushgateway-service:8080
+Pushgateway ClusterIP service: pushgateway-service.nsxi-platform-monitoring:8080
 Pushgateway NodePort 31000
+
+Grafana ClusterIP service: grafana-service.grafana:3000
+Grafana NodePort 32000
 
 1. Kakfa message rate for raw_flow. Prometheus metric: kafka_raw_flow
 2. Kakfa message rate for over_flow. Prometheus metric: kafka_over_flow
