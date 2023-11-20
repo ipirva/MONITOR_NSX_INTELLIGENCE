@@ -1,4 +1,35 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "9.5.14"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,7 +49,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
+  "id": null,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -35,7 +66,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Number of group compute relations\nThis should be less than 1 million and generally less than 100k. \nIf customer is on version older than 4.1.1 and seeing a lot of entries, increase clean up period and manually clean up entries\nUpgrading to 4.1.1 should fix the issue",
           "fieldConfig": {
@@ -78,8 +109,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "#EAB839",
@@ -120,7 +150,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "pace_groupcomputerelationshipconfig{instance=\"pace\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -136,7 +166,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Number of compute objects\nThis should generally be less than 10000",
           "fieldConfig": {
@@ -179,8 +209,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -217,7 +246,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "pace_normalizedcomputeconfig{instance=\"pace\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -247,7 +276,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Kakfa message rate for raw_flow\nThis number should be less than 333 for 5 worker nodes or less, and less than 666 for 8 worker nodes",
           "fieldConfig": {
@@ -290,8 +319,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -332,7 +360,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "kafka_raw_flow{instance=\"kafka\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -348,7 +376,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Kakfa message rate for over_flow. This number should generally be less than 999",
           "fieldConfig": {
@@ -391,8 +419,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -429,7 +456,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "kafka_over_flow{instance=\"kafka\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -459,7 +486,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "The sum of the folder sizes should typically be less than 60GB * number of minio pods, where /data/minio/druid using the bulk of storage (>90%). Typically not a concern except for https://kb.vmware.com/s/article/91696 in 4.0.1.",
           "fieldConfig": {
@@ -502,8 +529,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -540,7 +566,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "minio_total_data_storage{instance=\"minio\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -570,7 +596,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Get unique correlated_flow_viz number of segments from Druid\nThis number should generally be less than 40 million. \nIf not, please refer to https://kb.vmware.com/s/article/91932 to reduce the uniqueness in flow collection, \nand scale out to 8 worker nodes if possible.",
           "fieldConfig": {
@@ -613,8 +639,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -651,7 +676,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "druid_correlated_flow_viz_unique{instance=\"druid-broker\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -667,7 +692,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Get correlated_flow_viz number of segments from Druid\nThis number should be less than 80 million * number of worker nodes. \nIf already breaching, or approaching the threshold, it's recommended to scale out analytics.",
           "fieldConfig": {
@@ -710,8 +735,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -748,7 +772,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "druid_correlated_flow_viz{instance=\"druid-broker\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -778,7 +802,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Get total number of config objects in database.\nValues for each config type should be less than 10~20 times the number of object in the system.\nFor example, if there are 5000 VMs in the system, the number of objects should not be more than 100000.",
           "fieldConfig": {
@@ -821,8 +845,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -859,7 +882,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "druid_config_object_VM{instance=\"druid-broker\", job=\"nsxi-platform\", pushgateway_instance=\"pushgateway\"}",
@@ -875,7 +898,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Get total number of config objects in database.\nValues for each config type should be less than 10~20 times the number of object in the system.\nFor example, if there are 5000 VMs in the system, the number of objects should not be more than 100000.",
           "fieldConfig": {
@@ -918,8 +941,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -956,7 +978,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "druid_config_object_NS_GROUP{instance=\"druid-broker\", pushgateway_instance=\"pushgateway\", job=\"nsxi-platform\"}",
@@ -972,7 +994,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+            "uid": "${DS_PROMETHEUS}"
           },
           "description": "Get total number of config objects in database.\nValues for each config type should be less than 10~20 times the number of object in the system.\nFor example, if there are 5000 VMs in the system, the number of objects should not be more than 100000.",
           "fieldConfig": {
@@ -1015,8 +1037,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1053,7 +1074,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "eb444c94-e349-4027-a419-9ef45da1d543"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "builder",
               "expr": "druid_config_object_MANAGER_DFW_RULE",
