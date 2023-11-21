@@ -67,6 +67,8 @@ kubectl apply -f kubernetes-resources/cronjobs/
 6. Import the Grafana Dashboards
 Connect to Grafana web UI and import the Dashboards from the JSON sources found inside the folder grafana_dashboard
 The available Dashboards are:
+
 6.1. Prometheus and Pushgateway running metrics (CPU, Memory, Prometheus WAL size, Prometheus TSDB size)
+
 6.2. NSX Intelligence metrics
 
