@@ -5,8 +5,8 @@ Get some NSX Intelligence running parameters monitored. The metrics can be viewe
 [Deployment Steps](https://github.com/ipirva/MONITOR_NSX_INTELLIGENCE/blob/main/INSTALL.md)
 
 The NSX Intelligence monitored parameters:
-1. Kakfa message rate for raw_flow. Prometheus metric: kafka_raw_flow
-2. Kakfa message rate for over_flow. Prometheus metric: kafka_over_flow
+1. Kafka message rate for raw_flow. Prometheus metric: kafka_raw_flow
+2. Kafka message rate for over_flow. Prometheus metric: kafka_over_flow
 3. Number of compute objects. Prometheus metric: pace_normalizedcomputeconfig
 4. Number of group compute relations. Prometheus metric: pace_groupcomputerelationshipconfig
 5. Minio global data storage used. Prometheus metric: minio_total_data_storage
